@@ -1,0 +1,24 @@
+# 端口号
+server:
+  port: 10138
+# 数据库相关配置
+spring:
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  # 数据源
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.106.10.32:3306/yaoyingshi?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
+# 日志
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.springms: DEBUG
