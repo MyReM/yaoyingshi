@@ -5,13 +5,11 @@ import com.rem.yaoyingshi.service.BoxCollectService;
 import com.rem.yaoyingshi.utils.FileLoadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/boxCollect")
@@ -28,10 +26,18 @@ public class BoxCollectController {
         Boolean bl = FileLoadUtil.saveImage(file, fileName);
         if (bl) {
             boxCollect.setImageName("/static/images/" + fileName);
+            boxCollect.setUpdateTime(new Date());
             boxCollectService.save(boxCollect);
             return "success";
         } else {
             return "error";
         }
+    }
+
+    @GetMapping("/getAll")
+    public List<BoxCollect> getAll() {
+
+        List<BoxCollect> list = boxCollectService.findAll();
+        return list;
     }
 }

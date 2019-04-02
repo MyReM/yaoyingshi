@@ -18,14 +18,20 @@
 		<div class="masonry">
 			<div class="item" v-for="(val,index) in data" :key="val+index">
 				<div class="item_content item_middle">
-					<img :src="val.img"/>
+					<img :src="val.imageName"/>
 					<div class="item_line">
+						<div class="item_msg" style="font-size:16px;">
+							{{val.firstTitle}}
+						</div>
+						<div class="item_msg" style="color:#c0c0c0;">
+							{{val.secondTitle}}
+						</div>
 						<div class="item_msg">
-							{{val.msg}}
+							<a :href="val.anotherAddress">{{val.anotherAddress}}</a>
 						</div>
 					</div>
 					<div class="item_time">
-						 {{val.time}}
+						 {{val.updateTime}}
 					</div>
 				</div>
 			</div>
@@ -37,48 +43,16 @@ export default {
 	name: 'four',
 	data() {
 		return {
-			data: [{
-				'img' : '/static/images/cj1.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.01 14:30'
-			},{
-				'img' : '/static/images/cj2.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.01 14:30'
-			},{
-				'img' : '/static/images/cj3.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.01 14:30'
-			},{
-				'img' : '/static/images/cj4.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.01 14:30'
-			},{
-				'img' : '/static/images/cj5.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.01 14:30'
-			},{
-				'img' : '/static/images/cj6.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.01 14:30'
-			},{
-				'img' : '/static/images/cj7.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.01 14:30'
-			},{
-				'img' : '/static/images/cj8.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.01 14:30'
-			},{
-				'img' : '/static/images/cj9.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.01 14:30'
-			},{
-				'img' : '/static/images/cj10.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.01 14:30'
-			}]
+			data: null
 		}
+	},
+	created() {
+		this.$axios({
+			method: 'get',
+			url: '/boxCollect/getAll'
+		}).then(res => {
+			this.data = res.data
+		})
 	}
 }
 </script>

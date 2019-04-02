@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Data
 @Builder
@@ -35,4 +37,7 @@ public class BoxCollect {
     private String msg;
 
     private String imageName;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date updateTime;
 }
