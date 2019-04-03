@@ -20,7 +20,7 @@
           <el-upload
             class="avatar-uploader"
             ref="uploadImage"
-            action="http://47.106.10.32:10138/boxCollect/saveBox"
+            :action="imageAction"
             :show-file-list="false"
             :on-success="uploadSuccess" 
             :on-change="changeImage"
@@ -73,7 +73,8 @@ export default {
         anotherAddress: null,
         msg: null
       },
-      isShowImgUrl: true
+      isShowImgUrl: true,
+      imageAction: process.env.BASE_API + '/boxCollect/saveBox'
 		}
   },
   created(){
@@ -90,6 +91,13 @@ export default {
       this.$refs.uploadImage.clearFiles()
       this.isShowImgUrl = false
       this.imageUrl = '/static/images/upload.jpg'
+      this.collectBox = {
+        firstTitle: null,
+        secondTitle: null,
+        useTo: null,
+        anotherAddress: null,
+        msg: null
+      }
     },
     submitUpload() {
       this.$refs.uploadImage.submit()

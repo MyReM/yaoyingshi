@@ -39,6 +39,7 @@
   </div>    
 </template>
 <script>
+import {getAll} from '../api/yaoyingshi.js'
 export default {
 	name: 'four',
 	data() {
@@ -47,10 +48,7 @@ export default {
 		}
 	},
 	created() {
-		this.$axios({
-			method: 'get',
-			url: '/boxCollect/getAll'
-		}).then(res => {
+		getAll().then(res => {
 			this.data = res.data
 		})
 	}

@@ -10,13 +10,15 @@ public class FileLoadUtil {
 
     public static Boolean saveImage(MultipartFile file, String fileName) {
 
+//        本地测试保存地址
 //        String sysPath = System.getProperty("user.dir");
-//        String path = null;
+//        String path;
 //        if (sysPath.indexOf("/") == -1) {
 //            path = sysPath.substring(0,sysPath.lastIndexOf("\\")+1) + "frontend\\static\\images\\";
 //        } else {
 //            path = sysPath.substring(0,sysPath.lastIndexOf("/")+1) + "frontend/static/images/";
 //        }
+//        服务器保存地址
         String path = "/usr/local/nginx/html/static/images/";
         File file1 = new File(path + fileName);
         if (!file1.getParentFile().exists()) {
