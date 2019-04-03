@@ -5,21 +5,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class FileLoadUtil {
 
     public static Boolean saveImage(MultipartFile file, String fileName) {
 
-        String sysPath = System.getProperty("user.dir");
-        String path = null;
-        if (sysPath.indexOf("/") == -1) {
-            path = sysPath.substring(0,sysPath.lastIndexOf("\\")+1) + "frontend\\static\\images\\";
-        } else {
-            path = sysPath.substring(0,sysPath.lastIndexOf("/")+1) + "frontend/static/images/";
-        }
+//        String sysPath = System.getProperty("user.dir");
+//        String path = null;
+//        if (sysPath.indexOf("/") == -1) {
+//            path = sysPath.substring(0,sysPath.lastIndexOf("\\")+1) + "frontend\\static\\images\\";
+//        } else {
+//            path = sysPath.substring(0,sysPath.lastIndexOf("/")+1) + "frontend/static/images/";
+//        }
+        String path = "/usr/local/nginx/html/static/images/";
         File file1 = new File(path + fileName);
         if (!file1.getParentFile().exists()) {
             file1.getParentFile().mkdir();
@@ -49,5 +47,6 @@ public class FileLoadUtil {
 //        System.out.println("----------------------");
 //        Thread.sleep(500);
 //        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        System.out.println(System.getProperty("user.dir"));
     }
 }

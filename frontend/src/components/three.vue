@@ -20,7 +20,7 @@
           <el-upload
             class="avatar-uploader"
             ref="uploadImage"
-            action="http://localhost:10138/boxCollect/saveBox"
+            action="http://47.106.10.32:10138/boxCollect/saveBox"
             :show-file-list="false"
             :on-success="uploadSuccess" 
             :on-change="changeImage"

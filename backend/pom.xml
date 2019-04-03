@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.rem</groupId>
     <artifactId>yaoyingshi</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>yaoyingshi</name>
     <description>YaoYingShi project for Spring Boot</description>
 
