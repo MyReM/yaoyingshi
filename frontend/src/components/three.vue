@@ -95,7 +95,8 @@ export default {
         secondTitle: null,
         useTo: null,
         anotherAddress: null,
-        msg: null
+        msg: null,
+        msgType: '1'
       }
       this.$message({
         message: '数据保存成功',
