@@ -7,8 +7,8 @@
 						<img src="/static/images/ftc.png"/>
 					</li>
 					<li><router-link to= "/">首页</router-link></li>
-					<li><router-link to= "/four">盒子我们</router-link></li>
-					<li><router-link to= "/five">留言板</router-link></li>
+					<li><router-link to= "/four">说话的盒子</router-link></li>
+					<li><router-link to= "/five">技术交流</router-link></li>
 					<li><router-link to= "/second">概率事件</router-link></li>
 				</ul>
 			</div>
@@ -38,6 +38,10 @@
         <el-form-item label="二级标题:">
           <el-input placeholder="请填写副标题" v-model="collectBox.secondTitle"></el-input>
         </el-form-item>
+        <el-form-item label="盒子/技术:">
+          <el-radio v-model="collectBox.msgType" label="1">说话的盒子</el-radio>
+          <el-radio v-model="collectBox.msgType" label="2">技术交流</el-radio>
+        </el-form-item>
         <el-form-item label="规格/用处:">
           <el-input placeholder="请填写规格/用处" v-model="collectBox.useTo"></el-input>
         </el-form-item>
@@ -45,13 +49,7 @@
           <el-input placeholder="例如(https://www.baidu.com/)" v-model="collectBox.anotherAddress"></el-input>
         </el-form-item>
         <el-form-item label="详细描述:">
-          <el-input
-            style="width:98%;"
-            type="textarea"
-            :autosize="{ minRows: 6, maxRows: 6}"
-            placeholder="请输入内容"
-            v-model="collectBox.msg">
-          </el-input>
+          <el-input placeholder="详细描述" v-model="collectBox.msg"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="success" @click="submitUpload">提交到服务器</el-button>
@@ -71,7 +69,8 @@ export default {
         secondTitle: null,
         useTo: null,
         anotherAddress: null,
-        msg: null
+        msg: null,
+        msgType: '1'
       },
       isShowImgUrl: true,
       imageAction: process.env.BASE_API + '/boxCollect/saveBox'
@@ -98,9 +97,25 @@ export default {
         anotherAddress: null,
         msg: null
       }
+      this.$message({
+        message: '数据保存成功',
+        type: 'success'
+      })
     },
     submitUpload() {
+      // let issub = false
+      // if (this.collectBox.firstTitle === null) {
+      //   this.$message({
+      //     message: '请填写第一标题',
+      //     type: 'error'
+      //   })
+      //   issub = false
+      // } else {
+      //   issub = true
+      // } 
+      // if (issub) {
       this.$refs.uploadImage.submit()
+      // }
     }
   }
 }

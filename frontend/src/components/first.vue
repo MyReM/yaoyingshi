@@ -1,9 +1,14 @@
 <template>
   <div id="firstdiv">
     <header>
-      <div id="heade_div">
+      <el-carousel :interval="5000" arrow="always">
+        <el-carousel-item v-for="val in imageList" :key="val.src">
+          <img class="imgUrl" :src="val.src" @click="openUrl(val.url)"/>
+        </el-carousel-item>
+      </el-carousel>
+      <!-- <div id="heade_div">
         <div v-for="(val,index) in a" :key="val + index" :class="`con`+index">{{a[Math.round(Math.random()*10)]}}</div>
-      </div> 
+      </div>  -->
     </header>
     <br/>
     <span style="display:inline-block;border-top:1px solid;width:46%;height:.5em;color:#ccc;" class="spLine"></span>
@@ -15,17 +20,17 @@
       <div id="first-menu">
         <router-link :to="'/four'">
           <div class="first-small-place">
-            <h2>会说话的盒子</h2>
+            <h2 style="color:#935555;">会说话的盒子</h2>
           </div>
         </router-link>
         <router-link :to="'/three'">
           <div class="first-small-flower">
-            <h2>盒子收集</h2>
+            <h2>数据收集</h2>
           </div>
         </router-link>
         <router-link :to="'/five'">
           <div class="first-small-sweet">
-            <h2>留言板</h2>
+            <h2 style="color:#935555;">技术交流</h2>
           </div>
         </router-link>
         <router-link :to="'/second'">
@@ -46,36 +51,36 @@
     <div id="first-content">
       <div style="height:295px;">
         <div class="body-div">
-          <img src="/static/images/cj1.jpg" @click="isShowImg=true,showImg='/static/images/cj1.jpg'"/>
+          <img src="/static/images/vue2.png" @click="isShowImg=true,showImg='/static/images/vue2.png'"/>
           <div class="first-pointers bgwh onept"></div>
         </div>
         <div class="body-div">
           <div class="bd-firstmsg">
-            <div class="first-title">锦哥开车</div>
-            <h3>准备撞草堆</h3>
-            <div>锦哥自认车神，瞬间打脸</div>
+            <div class="first-title"><a href="https://cn.vuejs.org/v2/guide/index.html">VUE</a></div>
+            <h3>最新丶最火的前端神器</h3>
+            <div>Vue比JQuery减少了 DOM 操作,实现数据双向绑定以及更加简便的页面渲染丶事件绑定</div>
           </div>
           <div class="bd-secondmsg">
-            <div class="first-title first-title-left">秒变渣渣</div>
-            <h3>帅不过两秒系列</h3>
-            <div class="right-ms">话都未讲完就撞左上去</div>
+            <div class="first-title first-title-left"><a href="https://spring.io/projects/spring-boot">Boot</a></div>
+            <h3>目前流行的后台框架</h3>
+            <div class="right-ms">配置文件少，配置简单，采用注解，内置启动类，包含了tomcat，jetty等，整合其他插件更加方便快捷</div>
           </div>
           <div class="first-pointers onet"></div>
           <div class="first-pointers onew"></div>
         </div>
         <div class="body-div">
-          <img src="/static/images/cj3.jpg" @click="isShowImg=true,showImg='/static/images/cj3.jpg'"/>
+          <img src="/static/images/springboot.png" @click="isShowImg=true,showImg='/static/images/springboot.png'"/>
           <div class="first-pointers bgwh lastpt"></div>
         </div>
         <div class="body-div">
-          <img src="/static/images/cj6.jpg" @click="isShowImg=true,showImg='/static/images/cj6.jpg'"/>
+          <img src="/static/images/element.png" @click="isShowImg=true,showImg='/static/images/element.png'"/>
           <div class="first-pointers bgwh first-th-a hidden"></div>
         </div>
         <div class="body-div three-screen">
           <div class="one-msg one-msg-top three-screen-div">
-            <div class="first-title">表示辣鸡</div>
-            <h3>贵哥表示无奈</h3>
-            <div>贵哥话车技流就唔好开车啦</div>
+            <div class="first-title"><a href="http://element-cn.eleme.io/#/zh-CN/component/installation">Element</a></div>
+            <h3>饿了么前端框架</h3>
+            <div>Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库</div>
           </div>
           <div hidden class="first-pointers first-th-b hidden"></div>
         </div>
@@ -146,10 +151,28 @@
       return {
         a: ['盒子精','无敌战神','躺鸡萌妹','带妹上分','带兄弟上分','落地成盒','医疗兵','最佳第五人','暴走鸡神','迷你鸡王','车王'],
         showImg: '',
-        isShowImg: false
+        isShowImg: false,
+        imageList: [{
+          src: '/static/images/vue.png',
+          url: 'https://cn.vuejs.org/'
+        },{
+          src: '/static/images/element.png',
+          url: 'http://element-cn.eleme.io/#/zh-CN'
+        },{
+          src: '/static/images/node.png',
+          url: 'https://nodejs.org/zh-cn/'
+        },{
+          src: '/static/images/spring.png',
+          url: 'https://spring.io/'
+        }]
       }
     },
     created() {
+    },
+    methods: {
+      openUrl(url) {
+        top.location.href = url
+      }
     }
   }
 </script>
@@ -158,6 +181,8 @@
 
 img {
   object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
 }
 .logo_img {
   display: none;
@@ -205,8 +230,6 @@ body {
 header {
   width: 100%;
   height: 70%;
-  
-  background-image: url("/static/images/cj2.jpg");
   background-repeat: no-repeat; 
   background-size: 100%;
 }
@@ -215,6 +238,21 @@ header {
   display: inline-block;
   font-size: 20px;
   position: absolute;
+  cursor: pointer;
+}
+.el-carousel {
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+.el-carousel__container{
+  height:100%;
+}
+.el-carousel__indicators {
+  background: #151414;
+}
+.imgUrl {
   cursor: pointer;
 }
 @keyframes sparkling {
@@ -371,13 +409,14 @@ header {
   background-image: url("/static/images/msg.jpg");
 }
 .first-small-flower {
-  background-image: url("/static/images/flower.jpg");
+  background-image: url("/static/images/box.jpg");
 }
 .first-small-place {
-  background-image: url("/static/images/place.jpg");
+  color: #937793;
+  background-image: url("/static/images/tallBox.jpg");
 }
 .first-small-sweet {
-  background-image: url("/static/images/sweet.jpg");
+  background-image: url("/static/images/vue.png");
 }
 .first-small-sweet,.first-small-place,.first-small-flower,.first-small-message {
   background-repeat: no-repeat; 

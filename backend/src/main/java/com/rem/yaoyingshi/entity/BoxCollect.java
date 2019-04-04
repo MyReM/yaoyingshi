@@ -38,6 +38,7 @@ public class BoxCollect {
 
     private String imageName;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date updateTime;
+    private String updateTime;
+
+    private String msgType;
 }

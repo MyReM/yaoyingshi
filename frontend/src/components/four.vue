@@ -7,8 +7,8 @@
 						<img src="/static/images/ftc.png"/>
 					</li>
 					<li><router-link to= "/">首页</router-link></li>
-					<li><router-link to= "/three">盒子收集</router-link></li>
-					<li><router-link to= "/five">留言板</router-link></li>
+					<li><router-link to= "/three">数据收集</router-link></li>
+					<li><router-link to= "/five">技术交流</router-link></li>
 					<li><router-link to= "/second">概率事件</router-link></li>
 				</ul>
 			</div>
@@ -21,13 +21,16 @@
 					<img :src="val.imageName"/>
 					<div class="item_line">
 						<div class="item_msg" style="font-size:16px;">
-							{{val.firstTitle}}
+							<span v-if="val.firstTitle !== 'null'">{{val.firstTitle}}</span>
+							<span v-else style="color:#c0c0c0;">暂无标题</span>
 						</div>
-						<div class="item_msg" style="color:#c0c0c0;">
-							{{val.secondTitle}}
+						<div class="item_msg" style="color:#c0c0c0;text-align:left;">
+							<span v-if="val.secondTitle !== 'null'">{{val.secondTitle}}</span>
+							<span v-else>暂无其他描述</span>
 						</div>
-						<div class="item_msg">
-							<a :href="val.anotherAddress">{{val.anotherAddress}}</a>
+						<div class="item_msg" style="color:#c0c0c0;text-align:left;">
+							<a :href="val.anotherAddress" v-if="val.anotherAddress !== 'null'">{{val.anotherAddress === 'null' ? '暂无网址' : val.anotherAddress}}</a>
+							<span v-else>暂无网址</span>
 						</div>
 					</div>
 					<div class="item_time">
@@ -39,7 +42,7 @@
   </div>    
 </template>
 <script>
-import {getAll} from '../api/yaoyingshi.js'
+import {getAllBox} from '../api/yaoyingshi.js'
 export default {
 	name: 'four',
 	data() {
@@ -48,7 +51,7 @@ export default {
 		}
 	},
 	created() {
-		getAll().then(res => {
+		getAllBox().then(res => {
 			this.data = res.data
 		})
 	}
@@ -157,7 +160,7 @@ header .header_menu {
 }
 .item_content:hover {
 	top: -1px;
-	box-shadow: 0  2px 38px rgb(128, 114, 114);
+	box-shadow: 0  2px 10px rgb(128, 114, 114);
 }
 .item_content {
   position: relative;
@@ -185,7 +188,7 @@ header .header_menu {
 .item_time {
 	line-height:20px;
 	word-wrap: break-word;
-	width:80%;
+	width:100%;
 	padding:10px;
 	color:#ccc;
 }

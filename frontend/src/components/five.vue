@@ -1,5 +1,5 @@
 <template>
-  <div id="four">
+  <div id="technology">
 		<header>
 			<div class="header_menu">
 				<ul>
@@ -7,8 +7,8 @@
 						<img src="/static/images/ftc.png"/>
 					</li>
 					<li><router-link to= "/">首页</router-link></li>
-					<li><router-link to= "/three">盒子收集</router-link></li>
-					<li><router-link to= "/four">盒子我们</router-link></li>
+					<li><router-link to= "/three">数据收集</router-link></li>
+					<li><router-link to= "/four">说话的盒子</router-link></li>
 					<li><router-link to= "/second">概率事件</router-link></li>
 				</ul>
 			</div>
@@ -18,14 +18,23 @@
 		<div class="masonry">
 			<div class="item" v-for="(val,index) in data" :key="val+index">
 				<div class="item_content item_middle">
-					<img :src="val.img"/>
+					<a :href="val.anotherAddress"><img :src="val.imageName"/></a>
 					<div class="item_line">
-						<div class="item_msg">
-							{{val.msg}}
+						<div class="item_msg" style="font-size:16px;">
+							<span v-if="val.firstTitle !== 'null'">{{val.firstTitle}}</span>
+							<span v-else style="color:#c0c0c0;">暂无标题</span>
+						</div>
+						<div class="item_msg" style="color:#c0c0c0;text-align:left;">
+							<span v-if="val.secondTitle !== 'null'">{{val.secondTitle}}</span>
+							<span v-else>暂无其他描述</span>
+						</div>
+						<div class="item_msg" style="color:#c0c0c0;text-align:left;">
+							<a :href="val.anotherAddress" v-if="val.anotherAddress !== 'null'">{{val.anotherAddress === 'null' ? '暂无网址' : val.anotherAddress}}</a>
+							<span v-else>暂无网址</span>
 						</div>
 					</div>
 					<div class="item_time">
-						 {{val.time}}
+						 {{val.updateTime}}
 					</div>
 				</div>
 			</div>
@@ -33,58 +42,24 @@
   </div>    
 </template>
 <script>
+import {getAllTechnology} from '../api/yaoyingshi.js'
 export default {
-	name: 'four',
+	name: 'technology',
 	data() {
 		return {
-			data: [{
-				'img' : '/static/images/cj1.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.21 14:30'
-			},{
-				'img' : '/static/images/cj2.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.21 14:30'
-			},{
-				'img' : '/static/images/cj3.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.21 14:30'
-			},{
-				'img' : '/static/images/cj4.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.21 14:30'
-			},{
-				'img' : '/static/images/cj5.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.21 14:30'
-			},{
-				'img' : '/static/images/cj6.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.21 14:30'
-			},{
-				'img' : '/static/images/cj7.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.21 14:30'
-			},{
-				'img' : '/static/images/cj8.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.21 14:30'
-			},{
-				'img' : '/static/images/cj9.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.21 14:30'
-			},{
-				'img' : '/static/images/cj10.jpg',
-				'msg' : '大吉大利，今晚鸡否？',
-				'time' : '2019.03.21 14:30'
-			}]
+			data: null
 		}
+	},
+	created() {
+		getAllTechnology().then(res => {
+			this.data = res.data
+		})
 	}
 }
 </script>
 <style>
 @charset "UTF-8";
-#four header {
+#technology header {
 	overflow-x: hidden;
   position: relative;
   width: 100%;
@@ -96,27 +71,27 @@ a {
 	text-decoration: none;
 	color: #18314F;
 }
-#four ul {
+#technology ul {
 	margin: 0;
 	padding: 0;
 }
-#four li {
+#technology li {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
-#four header ul li {
+#technology header ul li {
 	width: 20%;
 	float: left;
 	line-height: 60px;
 }
-#four header ul li:first-child {
+#technology header ul li:first-child {
 	text-align: left;
 }
-#four header ul li img {
+#technology header ul li img {
 	height:60px;
 }
-#four header div {
+#technology header div {
 	width: 100%;
 	height:60px;
 }
@@ -169,11 +144,11 @@ header .header_menu {
   }
 }
 @media only screen and (min-width: 300px) and (max-width: 460px) {
-	.masonry {
+  .masonry {
 		width: 94%;
 		column-count: 2;
-	}
-	#four header ul li {
+  }
+	#technology header ul li {
 		font-size: 14px;
 	}
 }
@@ -185,7 +160,7 @@ header .header_menu {
 }
 .item_content:hover {
 	top: -1px;
-	box-shadow: 0  2px 38px rgb(128, 114, 114);
+	box-shadow: 0  2px 10px rgb(128, 114, 114);
 }
 .item_content {
   position: relative;
@@ -213,7 +188,7 @@ header .header_menu {
 .item_time {
 	line-height:20px;
 	word-wrap: break-word;
-	width:80%;
+	width:100%;
 	padding:10px;
 	color:#ccc;
 }
